@@ -1,215 +1,109 @@
-/* NiceCalc Pro - Dark Only */
-/* Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
 :root{
   --bg-0: #061019;
   --bg-1: #071424;
   --panel: rgba(255,255,255,0.03);
-  --glass: rgba(255,255,255,0.025);
   --accent-a: #00d2ff;
   --accent-b: #7b61ff;
-  --accent-2: linear-gradient(90deg,var(--accent-a),var(--accent-b));
   --text-main: #e6eef8;
   --muted: rgba(230,238,248,0.55);
   --danger: #ff6b6b;
   --key-shadow: rgba(2,6,23,0.6);
-  --glass-border: rgba(255,255,255,0.04);
 }
 
-/* Reset */
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
   margin:0;
-  min-height:100%;
-  font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  background: radial-gradient(1200px 600px at 10% 10%, rgba(123,97,255,0.06), transparent 8%),
-              linear-gradient(180deg,var(--bg-0),var(--bg-1));
+  font-family:'Inter',sans-serif;
+  background: linear-gradient(180deg,var(--bg-0),var(--bg-1));
   display:flex;
-  align-items:center;
   justify-content:center;
-  padding:28px;
+  align-items:center;
   color:var(--text-main);
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
 }
 
-/* App wrapper */
-.app{width:100%; max-width:520px; margin:auto;}
-
-/* Calculator card */
+/* Calculator wrapper */
 .calculator{
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  border-radius:16px;
-  padding:18px;
-  box-shadow: 0 12px 40px rgba(2,6,23,0.72), inset 0 1px 0 rgba(255,255,255,0.02);
-  border: 1px solid var(--glass-border);
-  transition: transform .22s cubic-bezier(.2,.9,.2,1);
-  max-width: 480px;
-  margin: 0 auto;
+  border-radius:14px;
+  padding:15px;
+  box-shadow: 0 10px 30px rgba(2,6,23,0.7);
+  border: 2px solid   var(--accent-b);
+  width: 300px;
 }
 
 /* Header */
-.calc-header{
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap:12px;
-  margin-bottom:14px;
+.calc-header h1{
+  font-size:16px;
+  text-align:center;
+  margin:0 0 10px;
 }
-.brand h1{
-  font-weight:600;
-  font-size:18px;
-  margin:0;
-}
-.brand .pro{
-  font-weight:700;
-  color:var(--accent-b);
-  margin-left:6px;
-  font-size:12px;
-  vertical-align:middle;
-}
-.tag{ display:block; color:var(--muted); font-size:12px; margin-top:4px; }
 
 /* Display */
 .display{
   background: var(--panel);
-  border-radius:12px;
-  padding:12px;
-  margin-bottom:14px;
-  min-height:72px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  gap:6px;
-  overflow:hidden;
-  position:relative;
-  transform-origin:center;
+  border-radius:10px;
+  padding:10px;
+  margin-bottom:12px;
+  border: 1px solid var(--accent-b);
 }
 .expression{
   color:var(--muted);
-  font-size:13px;
+  font-size:12px;
   text-align:right;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
-  padding-right:6px;
 }
 .result{
-  color:var(--text-main);
-  font-size:34px;
-  font-weight:700;
+  font-size:26px;
+  font-weight:600;
   text-align:right;
-  transition: transform .16s cubic-bezier(.2,.9,.2,1), color .12s;
-  padding-right:6px;
-  will-change:transform;
+  transition: transform .16s cubic-bezier(.2,.9,.2,1);
 }
 
-/* Keys — grid */
+/* Keys grid */
 .keys{
   display:grid;
   grid-template-columns: repeat(4, 1fr);
-  gap:10px;
-  align-items:center;
-  justify-items:center;
-  margin-bottom:6px;
+  gap:8px;
 }
-
-/* Buttons */
 .key{
   width:100%;
-  aspect-ratio: 1 / 1; /* keep square */
-  min-height:56px;
-  display:inline-flex;
+  aspect-ratio:1/1;
+  min-height:45px;
+  display:flex;
   align-items:center;
   justify-content:center;
-  border-radius:12px;
+  border-radius:10px;
   border:none;
   background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
   color:var(--text-main);
-  font-size:18px;
+  font-size:15px;
   cursor:pointer;
-  box-shadow: 0 8px 18px var(--key-shadow);
-  transition: transform .12s cubic-bezier(.2,.9,.2,1), box-shadow .12s, background .12s;
-  position:relative; /* for ripple */
+  box-shadow: 0 6px 14px var(--key-shadow);
+  position:relative;
   overflow:hidden;
-  user-select:none;
-  -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
 }
+.key-op{ background: linear-gradient(180deg, rgba(0,210,255,0.08), rgba(123,97,255,0.05)); font-weight:600; }
+.key-ac{ background: linear-gradient(180deg, rgba(255,107,107,0.08), rgba(255,107,107,0.03)); color:var(--danger); font-weight:600; }
+.key-equal{ background: linear-gradient(90deg,var(--accent-a),var(--accent-b)); color:#021022; font-weight:700; font-size:17px; }
+.key:hover{ transform: translateY(-3px); }
+.key:active{ transform: translateY(0px) scale(.97); }
 
-/* Special key styles */
-.key-op{ background: linear-gradient(180deg, rgba(0,210,255,0.08), rgba(123,97,255,0.05)); color:#e9fcff; font-weight:700; }
-.key-ac{ background: linear-gradient(180deg, rgba(255,107,107,0.08), rgba(255,107,107,0.03)); color:var(--danger); font-weight:700; box-shadow: 0 8px 22px rgba(255,107,107,0.06);}
-.key-del{ color:var(--muted); }
-.key-equal{ background: var(--accent-2); color:#041022; font-weight:800; font-size:20px; box-shadow: 0 10px 30px rgba(0,210,255,0.12); }
-
-/* Hover / active */
-.key:hover{ transform: translateY(-6px) scale(1.02); box-shadow: 0 18px 38px rgba(2,6,23,0.6); }
-.key:active{ transform: translateY(0px) scale(.98); box-shadow: 0 8px 18px rgba(2,6,23,0.45); }
-
-/* Ripple element (created by JS) */
+/* Ripple animation */
 .ripple {
-  position: absolute;
-  border-radius: 50%;
-  transform: scale(0);
-  background: rgba(255,255,255,0.12);
-  animation: ripple .56s ease-out;
-  pointer-events:none;
+  position:absolute;
+  border-radius:50%;
+  transform:scale(0);
+  background:rgba(255,255,255,0.15);
+  animation:ripple .5s ease-out;
 }
 @keyframes ripple {
-  to {
-    transform: scale(2.6);
-    opacity: 0;
-  }
+  to { transform:scale(2.5); opacity:0; }
 }
-
-/* Equal key animated glow */
-@keyframes equal-glow {
-  0% { box-shadow: 0 8px 22px rgba(0,210,255,0.06); transform: translateY(0) scale(1); }
-  50% { box-shadow: 0 18px 48px rgba(123,97,255,0.12); transform: translateY(-2px) scale(1.02); }
-  100% { box-shadow: 0 8px 22px rgba(0,210,255,0.06); transform: translateY(0) scale(1); }
-}
-.key-equal.pulse { animation: equal-glow 1.6s ease-in-out; }
 
 /* Footer */
-.calc-footer{ text-align:center; color:var(--muted); font-size:12px; margin-top:6px; }
-
-/* Responsive behavior (phones & tablets) */
-@media (max-width: 992px) {
-  .app{max-width:420px}
-  .calculator{ padding:14px; border-radius:12px; }
-  .result{ font-size:30px }
-  .expression{ font-size:12px }
-  .key{ min-height:52px; font-size:17px; border-radius:10px }
-  .keys{ gap:8px }
-}
-@media (max-width: 768px) {
-  .app{max-width:360px}
-  .result{ font-size:26px }
-  .key{ min-height:48px; font-size:16px }
-}
-@media (max-width: 420px) {
-  .app{max-width:320px}
-  .display{ min-height:54px; padding:8px }
-  .result{ font-size:22px }
-  .key{ min-height:44px; font-size:15px; border-radius:10px }
-}
-@media (max-width: 360px) {
-  .app{max-width:300px}
-  .key{ min-height:40px; font-size:14px }
-  .result{ font-size:20px }
-}
-
-/* small accessibility tweak for keyboard kbd look */
-kbd{
-  display:inline-block;
-  padding:2px 6px;
-  background:rgba(255,255,255,0.03);
-  border-radius:6px;
-  border:1px solid rgba(255,255,255,0.02);
-  font-weight:600;
-  font-size:11px;
-  color:var(--muted);
-}
+.calc-footer{ text-align:center; color:var(--muted); font-size:11px; margin-top:6px }
